@@ -8,6 +8,8 @@ export const getCoordinates = createAsyncThunk('getCoordinates', async (address)
   return response;
 }) 
 
+
+
 const mapSlice = createSlice({
   name: 'map',
   initialState: {
@@ -47,7 +49,7 @@ const mapSlice = createSlice({
          
           state.value.status = 'loading'
           },
-      }  
+        }  
   
 })
 export const selectCenter = state => state.map.value;
