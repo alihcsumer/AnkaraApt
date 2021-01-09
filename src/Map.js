@@ -19,8 +19,8 @@ function Map(props) {
  
   const center = useSelector(selectCenter);
   const features = useSelector(selectFeatureCollection);
+  const dispatch = useDispatch()
 
-  useDispatch(getAptFeatures());
  
 
   const [viewport, setViewport] = useState({
@@ -42,10 +42,10 @@ function Map(props) {
  }, [props.panelopened]);
 
  useEffect(() => {
+ console.log("a");
+  dispatch(getAptFeatures());
  
-  console.log(features);
- 
-}, [features]);
+}, []);
 
   return (
     <ReactMapGL {...viewport}

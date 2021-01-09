@@ -7,7 +7,7 @@ async function getBuildingFeatures()
     try {
         let result = await axios.get(`./geojson.json`); 
 
-          if(result.data && result.data.length >0)
+          if(result.data)
           {
               return {featureCollection : result.data } 
           }
