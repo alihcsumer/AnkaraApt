@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useDispatch ,useSelector} from 'react-redux'
 import {
-    getCoordinates,selectSearchStatus
+    getCoordinates,selectSearchStatus,
   } from './reducers/mapSlice';
 
 function SearchBox(props) {

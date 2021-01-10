@@ -7,7 +7,8 @@ import {
 } from './reducers/mapSlice';
 import {
   selectFeatureCollection,
-  getAptFeatures
+  getAptFeatures,
+  buildingSelected
 } from './reducers/buildingSlice';
 
 
@@ -49,7 +50,14 @@ function Map(props) {
   return (
     <ReactMapGL {...viewport}
       onViewportChange={nextViewport => setViewport(nextViewport)}
-      onClick= { info => console.log('Clicked:', info.features && info.features[0].properties.id)}
+      onClick= { info =>
+        {
+          if( info.features && info.features[0] && info.features[0].properties)
+          dispatch(buildingSelected(info.features[0].properties.id))
+          
+       
+      
+      }}
    >
           <Source id="my-data" type="geojson" data={features}>
           <Layer
@@ -57,7 +65,7 @@ function Map(props) {
             id="point"
             type="circle"
             paint={{
-              'circle-radius': 5,
+              'circle-radius': 7,
               'circle-color': '#ff652f',
               "circle-stroke-color" : "#796057",
               "circle-stroke-width" : 1

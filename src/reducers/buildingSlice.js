@@ -18,8 +18,13 @@ const buildingsSlice = createSlice({
     }
   },
   reducers: {
-    buildingelected: (state, action) => {
-       debugger;
+    buildingSelected: (state, action) => {
+      
+       let tw = state.value.aptdetails.find(item => item.id == action.payload)
+       if(tw)
+       {
+           state.value.singleapt = tw;
+       }
       },
   },
   extraReducers:  { 
@@ -35,7 +40,7 @@ const buildingsSlice = createSlice({
         }  
   
 })
-export const { buildingelected } = buildingsSlice.actions
+export const { buildingSelected } = buildingsSlice.actions
 export const selectFeatureCollection = state => state.buildings.value.featureCollection;
-
+export const selectSingleApt = state => state.buildings.value.singleapt;
 export default buildingsSlice.reducer

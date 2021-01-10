@@ -1,3 +1,6 @@
+
+
+
 function BuildInfoCard(props) {
     return (
         <div class="buildinfocard">
