@@ -13,7 +13,6 @@ import {
 
 
 
-
 function Map(props) {
 
  
@@ -42,7 +41,7 @@ function Map(props) {
  }, [props.panelopened]);
 
  useEffect(() => {
- console.log("a");
+ 
   dispatch(getAptFeatures());
  
 }, []);
@@ -50,14 +49,18 @@ function Map(props) {
   return (
     <ReactMapGL {...viewport}
       onViewportChange={nextViewport => setViewport(nextViewport)}
-    >
+      onClick= { info => console.log('Clicked:', info.features && info.features[0].properties.id)}
+   >
           <Source id="my-data" type="geojson" data={features}>
           <Layer
+          
             id="point"
             type="circle"
             paint={{
-              'circle-radius': 10,
-              'circle-color': '#007cbf'
+              'circle-radius': 5,
+              'circle-color': '#ff652f',
+              "circle-stroke-color" : "#796057",
+              "circle-stroke-width" : 1
             }} />
               </Source>
     </ReactMapGL>

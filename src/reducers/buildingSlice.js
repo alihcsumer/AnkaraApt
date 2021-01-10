@@ -1,5 +1,6 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
 import {getBuildingFeatures} from "../files/buildinginfo";
+import BuildingDetails from "../files/sample_file.json"
 
  
 export const getAptFeatures = createAsyncThunk('getAptFeatures', async () => {
@@ -11,11 +12,15 @@ const buildingsSlice = createSlice({
   name: 'buildings',
   initialState: {
     value: {
-       featureCollection : null
+       featureCollection : null,
+       aptdetails : BuildingDetails,
+       singleapt : null
     }
   },
   reducers: {
- 
+    buildingelected: (state, action) => {
+       debugger;
+      },
   },
   extraReducers:  { 
       [getAptFeatures.fulfilled] :(state, action) => {
@@ -30,7 +35,7 @@ const buildingsSlice = createSlice({
         }  
   
 })
-
+export const { buildingelected } = buildingsSlice.actions
 export const selectFeatureCollection = state => state.buildings.value.featureCollection;
 
 export default buildingsSlice.reducer
