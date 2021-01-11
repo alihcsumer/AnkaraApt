@@ -1,6 +1,6 @@
 import BuildInfoCard from "./BuildInfoCard"
 import BuildPhoto from "./BuildPhoto"
-import {Fragment,useState} from 'react';
+import {Fragment,useState,useEffect} from 'react';
 
 import { useSelector} from 'react-redux'
 
@@ -19,7 +19,7 @@ function InfoPanel(props) {
 
     const buildingobject = useSelector(selectSingleApt);
 
-    const [imageselected,setLightBox] = useState({lightbox:false,index : -1});
+    const [imageselected,setLightBox] = useState({lightbox:false,index : -1,panelopened:false});
 
     // let buildingobject = {
     //     photos :['https://pbs.twimg.com/media/EoyAHytXYAExZT0?format=jpg&name=360x360',
@@ -30,6 +30,17 @@ function InfoPanel(props) {
     //     address : "Şehit Erdönmez Sokak No:8"
      
     //      };
+
+  useEffect(()=>{
+      setLightBox(state=>({...state,panelopened:true}));
+   
+  },[buildingobject])
+
+  useEffect(()=>{
+    setLightBox(state=>({...state,panelopened:props.panelopened}));
+ 
+},[props.panelopened])
+  
 
    const renderLightBox = () => {
        if(imageselected.lightbox)
@@ -44,7 +55,7 @@ function InfoPanel(props) {
             mainSrc={images[index]}
             nextSrc={images[(index + 1) % images.length]}
             prevSrc={images[(index + images.length - 1) % images.length]}
-            onCloseRequest={()=>{setLightBox(state => ({lightbox:false, index: index}))}}
+            onCloseRequest={()=>{setLightBox(state => ({...state,lightbox:false, index: index}))}}
             onMovePrevRequest={() =>
 
               setLightBox(state => ({...state, index: (index + images.length - 1) % images.length}))
@@ -60,7 +71,8 @@ function InfoPanel(props) {
 
 
     const renderBuildInfo = () => {
-        if(buildingobject && props.panelopened)
+      
+        if(buildingobject && (props.panelopened||imageselected.panelopened))
         {
         return (
             <div class="buildinfo">
@@ -70,7 +82,7 @@ function InfoPanel(props) {
                  {
                 
                  buildingobject.images.map((item,index)=>{
-                                    return <BuildPhoto onClick={()=>{setLightBox(state => ({lightbox:true, index: index}))}} key={index} src={item}/>
+                                    return <BuildPhoto onClick={()=>{setLightBox(state => ({...state,lightbox:true, index: index}))}} key={index} src={item}/>
                })}
                 
                 {renderLightBox()}
@@ -86,7 +98,7 @@ function InfoPanel(props) {
 
     return (
  <Fragment>
-<div className= {props.panelopened ? 'infocontainer open': "infocontainer"}>
+<div className= {props.panelopened || imageselected.panelopened ? 'infocontainer open': "infocontainer"}>
    <div class="infocontainer_arrow">
        <a href="#!">
            <i class="fas fa-chevron-left" onClick={() => { props.setOpen(!props.panelopened); }}></i>
