@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 import { useState,useEffect } from 'react';
 import ReactMapGL, {Source, Layer} from 'react-map-gl';
 import { useDispatch ,useSelector} from 'react-redux'
