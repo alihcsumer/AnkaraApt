@@ -6,10 +6,10 @@ function Header() {
             <div class="logocontainer_text">Ankara Apartmanları</div>
         </div>
         <div class="social-icons">
-            <a href="#!">
+            <a href="https://twitter.com/AnkaraApartman" target="_blank">
                 <i class="fab fa-twitter"></i>
             </a>
-            <a href="#!">
+            <a href="https://www.instagram.com/ankaraapartmanlari/?hl=en" target="_blank">
                 <i class="fab fa-instagram"></i>
             </a>
             

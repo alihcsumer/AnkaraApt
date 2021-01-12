@@ -19,7 +19,7 @@ function InfoPanel(props) {
 
     const buildingobject = useSelector(selectSingleApt);
 
-    const [imageselected,setLightBox] = useState({lightbox:false,index : -1,panelopened:false});
+    const [imageselected,setLightBox] = useState({lightbox:false,index : -1});
 
     // let buildingobject = {
     //     photos :['https://pbs.twimg.com/media/EoyAHytXYAExZT0?format=jpg&name=360x360',
@@ -32,14 +32,12 @@ function InfoPanel(props) {
     //      };
 
   useEffect(()=>{
-      setLightBox(state=>({...state,panelopened:true}));
+      if(buildingobject)
+    {props.setOpen(true);}
    
   },[buildingobject])
 
-  useEffect(()=>{
-    setLightBox(state=>({...state,panelopened:props.panelopened}));
- 
-},[props.panelopened])
+
   
 
    const renderLightBox = () => {
@@ -98,7 +96,7 @@ function InfoPanel(props) {
 
     return (
  <Fragment>
-<div className= {props.panelopened || imageselected.panelopened ? 'infocontainer open': "infocontainer"}>
+<div className= {props.panelopened  ? 'infocontainer open': "infocontainer"}>
    <div class="infocontainer_arrow">
        <a href="#!">
            <i class="fas fa-chevron-left" onClick={() => { props.setOpen(!props.panelopened); }}></i>
