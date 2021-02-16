@@ -73,9 +73,9 @@ function InfoPanel(props) {
         if(buildingobject && (props.panelopened||imageselected.panelopened))
         {
         return (
-            <div class="buildinfo">
-            <BuildInfoCard buildingName={buildingobject.name.length == 0?"Ankara Apartmanları":buildingobject.name} address={buildingobject.sokak + buildingobject.no + " " + buildingobject.id } />
-                 <div class="buildphotos">
+            <div className="buildinfo">
+            <BuildInfoCard buildingName={buildingobject.name.length == 0?"Ankara Apartmanları":buildingobject.name} address={buildingobject.sokak + buildingobject.no } />
+                 <div className="buildphotos">
              
                  {
                 
@@ -95,7 +95,7 @@ function InfoPanel(props) {
        
 
     return (
- <Fragment>
+ <>
 <div className= {props.panelopened  ? 'infocontainer open': "infocontainer"}>
    <div class="infocontainer_arrow">
        <a href="#!">
@@ -108,7 +108,7 @@ function InfoPanel(props) {
 
  <div class="yandexcard"></div>
 </div>
-</Fragment>
+</>
     );
 }
 
