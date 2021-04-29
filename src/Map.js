@@ -34,7 +34,7 @@ function Map(props) {
 
     useEffect(() => {
          setViewport(state => ({ ...state, latitude:center.latitude,longitude:center.longitude,zoom:center.zoom }));
-    }, [center.latitude,center.longitude,center.zoom]);
+    }, [center.latitude,center.longitude,center.zoom,center.status]);
 
     useEffect(() => {
      setViewport(state => ({ ...state, width: "100%"}));
@@ -46,6 +46,8 @@ function Map(props) {
   dispatch(getAptFeatures());
  
 }, []);
+
+
 
   return (
     <ReactMapGL {...viewport}

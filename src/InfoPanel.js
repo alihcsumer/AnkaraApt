@@ -1,6 +1,7 @@
 import BuildInfoCard from "./BuildInfoCard"
 import BuildPhoto from "./BuildPhoto"
 import {Fragment,useState,useEffect} from 'react';
+import YandexPanorama from "./Panorama"
 
 import { useSelector} from 'react-redux'
 
@@ -106,7 +107,9 @@ function InfoPanel(props) {
    
 {renderBuildInfo()}
 
- <div class="yandexcard"></div>
+ <div class="yandexcard">
+ {buildingobject && (props.panelopened||imageselected.panelopened) && <YandexPanorama building={buildingobject}></YandexPanorama>}
+ </div>
 </div>
 </>
     );
