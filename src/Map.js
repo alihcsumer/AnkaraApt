@@ -21,6 +21,8 @@ function Map(props) {
   const features = useSelector(selectFeatureCollection);
   const dispatch = useDispatch()
 
+  const [clickedfeature, setClickedFeature] = useState();
+
  
 
   const [viewport, setViewport] = useState({
@@ -47,21 +49,38 @@ function Map(props) {
  
 }, []);
 
+const handleMapClick = (info) => {
+  if( info.features && info.features[0] && info.features[0].properties)
+  { 
+    const currentFeature = features.features.find(ftr => ftr.properties.id === info.features[0].properties.id);
+  
+    setClickedFeature(currentFeature);
+    setViewport(state => ({ ...state, latitude:info.features[0].geometry.coordinates[1],longitude:info.features[0].geometry.coordinates[0]}));
+    dispatch(buildingSelected(info.features[0].properties.id))
+  }
+
+}
+
 
 
   return (
     <ReactMapGL {...viewport}
       onViewportChange={nextViewport => setViewport(nextViewport)}
-      onClick= { info =>
-        {
-          if( info.features && info.features[0] && info.features[0].properties)
-          dispatch(buildingSelected(info.features[0].properties.id))
-          
-       
-      
-      }}
+      onClick= {handleMapClick}
    >
-          <Source id="my-data" type="geojson" data={features}>
+        { clickedfeature && <Source id="highlight" type="geojson" data={clickedfeature}>
+          <Layer
+          
+            id="clickedpoint"
+            type="circle"
+            paint={{
+              'circle-radius': 7,
+              'circle-color': '#796057',
+              "circle-stroke-color" : "#ff652f",
+              "circle-stroke-width" : 2
+            }} />
+              </Source>
+        }<Source id="my-data" type="geojson" data={features}>
           <Layer
           
             id="point"
